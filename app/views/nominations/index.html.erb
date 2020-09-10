@@ -1,0 +1,5 @@
+<% current_user.nominations.each do |nom| %>
+  <ul>
+    <li><%= nom.imdb_id %></li>
+  </ul>
+<% end %>
