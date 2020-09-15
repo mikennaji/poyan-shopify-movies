@@ -1,21 +1,20 @@
 class NominationsController < ApplicationController
-  def index
-  end
-
   def create
-  # Post
-  raise
-  @nomination = Nomination.new(user: current_user, imdb_id: params[:imdbID])
-  if @nomination.save
-    flash.notice = "New nomination created!"
-  else
-    flash.notice = "Error occured!"
-  end
+    # Post
+    @nomination = Nomination.new(user: current_user, imdb_id: params[:imdbID])
+    redirect_to root_path
+    if @nomination.save
+      flash.notice = "New nomination created!"
+    else
+      flash.notice = "Error occured!"
+    end
   end
 
-  # private
-  # def nomination_params
-  #   params.require(:nomination).permit(:imdb_id)
-  # end
-
+  def destroy
+    # raise
+    @nomination = Nomination.find(params[:id])
+    redirect_to root_path
+    @nomination.destroy
+    flash.notice = "Nomination deleted!"
+  end
 end
